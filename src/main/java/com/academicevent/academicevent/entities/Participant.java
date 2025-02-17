@@ -17,9 +17,9 @@ public class Participant {
     private String email;
 
     @ManyToMany
-    @JoinTable(name = "tb_participant_category",
+    @JoinTable(name = "tb_participant_activity",
     joinColumns = @JoinColumn(name = "participant_id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    inverseJoinColumns = @JoinColumn(name = "activity_id"))
     private Set<Activity> activities = new HashSet<>();
 
 

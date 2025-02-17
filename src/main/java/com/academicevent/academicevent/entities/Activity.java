@@ -18,14 +18,15 @@ public class Activity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+
     private Double price;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(mappedBy = "activity", cascade = CascadeType.ALL)
-    private Block block;
+    @OneToMany(mappedBy = "activity")
+    private Set<Block> block = new HashSet<>();
 
     @ManyToMany(mappedBy = "activities")
     private Set<Participant> participants = new HashSet<>();
@@ -35,13 +36,12 @@ public class Activity {
     }
 
     public Activity(Integer id, String name, String description,
-                    Double price, Category category, Block block) {
+                    Double price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.block = block;
     }
 
     public Integer getId() {
@@ -84,12 +84,8 @@ public class Activity {
         this.category = category;
     }
 
-    public Block getBlock() {
+    public Set<Block> getBlock() {
         return block;
-    }
-
-    public void setBlock(Block block) {
-        this.block = block;
     }
 
     public Set<Participant> getParticipants() {
