@@ -17,7 +17,7 @@ public class Block {
     private Instant endTime;
 
     @ManyToOne
-    @JoinColumn(name = "activity_id")
+    @JoinColumn(name = "activity_id", nullable = false)
     private Activity activity;
 
     public Block(){

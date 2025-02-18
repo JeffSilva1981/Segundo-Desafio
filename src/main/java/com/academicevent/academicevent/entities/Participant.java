@@ -16,10 +16,7 @@ public class Participant {
     @Column(unique = true)
     private String email;
 
-    @ManyToMany
-    @JoinTable(name = "tb_participant_activity",
-    joinColumns = @JoinColumn(name = "participant_id"),
-    inverseJoinColumns = @JoinColumn(name = "activity_id"))
+    @ManyToMany(mappedBy = "participants")
     private Set<Activity> activities = new HashSet<>();
 
 

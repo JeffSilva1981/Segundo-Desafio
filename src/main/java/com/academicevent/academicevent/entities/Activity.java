@@ -1,7 +1,6 @@
 package com.academicevent.academicevent.entities;
 
 import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,17 +17,19 @@ public class Activity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "activity")
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Block> block = new HashSet<>();
 
-    @ManyToMany(mappedBy = "activities")
+    @ManyToMany
+    @JoinTable(name = "tb_activity_participant",
+            joinColumns = @JoinColumn(name = "activity_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id"))
     private Set<Participant> participants = new HashSet<>();
 
     public Activity() {

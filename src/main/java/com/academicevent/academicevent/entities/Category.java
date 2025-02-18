@@ -16,7 +16,7 @@ public class Category {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Activity> activities = new ArrayList<>();
 
     public Category(){
